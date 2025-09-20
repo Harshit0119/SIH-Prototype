@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<!-- saved from url=(0030)http://127.0.0.1:5500/pro.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Scheduler</title>
+    <script src="./Smart Scheduler_files/saved_resource"></script>
+    <style>
+        /* Professional white background for all divs */
+        body>div {
+            background: #ffffff;
+            color: #374151;
+            border-radius: 1rem;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        /* Professional text colors */
+        body>div h1,
+        body>div h2,
+        body>div h3,
+        body>div p,
+        body>div .small {
+            color: #374151;
+        }
+
+        /* Style inputs and selects for professional appearance */
+        body>div input,
+        body>div select {
+            background: #f9fafb;
+            color: #374151;
+            border: 1px solid #e5e7eb;
+        }
+
+        body>div input:focus,
+        body>div select:focus {
+            background: #ffffff;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+        }
+
+        /* Style buttons for professional appearance */
+        body>div .btn {
+            color: white;
+        }
+
+        /* Adjust card styling for professional theme */
+        body>div .card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+        }
+
+        /* Table styling adjustments */
+        body>div table {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+        }
+
+        body>div th,
+        body>div td {
+            border: 1px solid #e5e7eb;
+        }
+
+        /* Custom header adjustments */
+        body>div .custom-gradient {
+            border: 1px solid #e5e7eb;
+        }
+
+        /* Front page specific styling */
+        #front {
+            background: #ffffff !important;
+            border: 1px solid #e5e7eb;
+        }
+
+        /* Back button styling for professional theme */
+        body>div button[onclick*="showPage"]:not(.btn) {
+            background: #f9fafb;
+            color: #374151;
+            border: 1px solid #e5e7eb;
+        }
+
+        body>div button[onclick*="showPage"]:not(.btn):hover {
+            background: #f3f4f6;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #f9fafb;
+            color: #374151;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Professional cards */
+        .card {
+            background: #ffffff;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover::after {
+            transform: translateX(0);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4f46e5, #4338ca);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #4338ca, #3730a3);
+            box-shadow: 0 4px 8px rgba(79, 70, 229, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-green {
+            background: linear-gradient(135deg, #059669, #065f46);
+        }
+
+        .btn-green:hover {
+            background: linear-gradient(135deg, #065f46, #064e3b);
+            box-shadow: 0 4px 8px rgba(5, 150, 105, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-indigo {
+            background: linear-gradient(135deg, #4f46e5, #312e81);
+        }
+
+        .btn-indigo:hover {
+            background: linear-gradient(135deg, #312e81, #1e1b4b);
+            box-shadow: 0 4px 8px rgba(79, 70, 229, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Page transitions */
+        .page {
+            transition: all 0.3s ease;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .small {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #ffffff;
+            backdrop-filter: none;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            color: #374151;
+        }
+
+        th,
+        td {
+            border: 1px solid #e5e7eb;
+            padding: 0.75rem;
+            text-align: center;
+        }
+
+        th {
+            background: linear-gradient(135deg, #f9fafb, #f3f4f6);
+            color: #374151;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        /* Inputs and selects */
+        input,
+        select {
+            background: #f9fafb;
+            backdrop-filter: none;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            color: #374151;
+            transition: all 0.2s ease;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+            background: #ffffff;
+        }
+
+        /* Custom headers */
+        .custom-gradient {
+            background: linear-gradient(90deg, #f9fafb, #f3f4f6);
+            color: #374151;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            backdrop-filter: none;
+            border: 1px solid #e5e7eb;
+        }
+
+        /* Front page styling */
+        #front {
+            background: #ffffff !important;
+            backdrop-filter: none;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+            animation: none;
+        }
+
+        h1,
+        h2,
+        h3 {
+            background: linear-gradient(135deg, #4f46e5, #1e40af);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        /* Subtle hover effects */
+        .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            body>div {
+                width: 100% !important;
+                max-width: 100%;
+                padding: 1.25rem;
+            }
+
+            .card {
+                padding: 1rem;
+            }
+
+            table {
+                font-size: 0.75rem;
+            }
+
+            th,
+            td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.mx-auto{margin-left:auto;margin-right:auto}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mt-3{margin-top:0.75rem}.mt-4{margin-top:1rem}.flex{display:flex}.grid{display:grid}.hidden{display:none}.w-32{width:8rem}.w-\[400px\]{width:400px}.w-\[500px\]{width:500px}.w-full{width:100%}.max-w-5xl{max-width:64rem}.max-w-6xl{max-width:72rem}.border-collapse{border-collapse:collapse}.items-center{align-items:center}.justify-between{justify-content:space-between}.gap-6{gap:1.5rem}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.rounded-3xl{border-radius:1.5rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.bg-blue-50{--tw-bg-opacity:1;background-color:rgb(239 246 255 / var(--tw-bg-opacity, 1))}.bg-blue-600{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.p-2{padding:0.5rem}.p-3{padding:0.75rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.text-center{text-align:center}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-semibold{font-weight:600}.text-blue-700{--tw-text-opacity:1;color:rgb(29 78 216 / var(--tw-text-opacity, 1))}.text-gray-700{--tw-text-opacity:1;color:rgb(55 65 81 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.hover\:bg-blue-700:hover{--tw-bg-opacity:1;background-color:rgb(29 78 216 / var(--tw-bg-opacity, 1))}</style></head>
+
+<body>
+    <div id="front" class="w-[400px] bg-white rounded-3xl shadow-xl p-8 text-center">
+        <h1 class="text-3xl font-extrabold mb-4">Smart Scheduler</h1>
+        <p class="small mb-6">Classroom &amp; Timetable Management</p>
+        <button onclick="showPage(&#39;register&#39;)" class="btn btn-primary w-full">Get Started</button>
+    </div>
+
+    <div id="register" class="w-[500px] bg-white rounded-3xl shadow-2xl p-8 hidden">
+        <h2 class="text-2xl font-bold text-center mb-6">Register Your Institute</h2>
+        <div class="card mb-4" style="background:#eff6ff">
+            <h3 class="font-semibold">Register College</h3>
+            <input id="collegeName" placeholder="College Name" class="w-full p-3 mb-2">
+            <button onclick="validateAndShowDept(&#39;college&#39;)" class="btn btn-primary w-full">Register College</button>
+        </div>
+
+        <div class="card mb-4" style="background:#ecfdf5">
+            <h3 class="font-semibold">Register School</h3>
+            <input id="schoolName" placeholder="School Name" class="w-full p-3 mb-2">
+            <button onclick="validateAndShowDept(&#39;school&#39;)" class="btn btn-green w-full">Register School</button>
+        </div>
+
+        <button onclick="showPage(&#39;front&#39;)" class="mt-4 w-32 px-3 py-1 rounded-full text-white text-sm bg-blue-600 hover:bg-blue-700 transition-colors duration-300">
+            Back
+        </button>
+    </div>
+
+    <div id="schoolRoles" class="w-[400px] bg-white rounded-3xl shadow-xl p-8 text-center hidden">
+        <h2 class="text-2xl font-bold mb-6">Select Your Role</h2>
+
+        <button onclick="showPage(&#39;loginAdmin&#39;)" class="btn btn-primary w-full mb-2">Admin</button>
+        <button onclick="showPage(&#39;loginPrincipal&#39;)" class="btn btn-indigo w-full mb-2">Principal</button>
+        <button onclick="showPage(&#39;loginFaculty&#39;)" class="btn btn-green w-full">Faculty</button>
+
+        <button onclick="showPage(&#39;register&#39;)" class="mt-4 w-32 px-3 py-1 rounded-full text-white text-sm bg-blue-600 hover:bg-blue-700 transition-colors duration-300">
+            Back
+        </button>
+    </div>
+
+
+    <div id="department" class="w-[400px] bg-white rounded-3xl shadow-xl p-8 text-center hidden">
+        <h2 id="instituteNameDisplay" class="text-xl font-bold mb-4"></h2>
+        <h2 class="text-2xl font-bold mb-6">Select Your Department</h2>
+
+        <select id="departmentSelect" class="w-full p-3 mb-4" onchange="handleDepartmentChange()">
+            <option value=""></option>
+            <!-- College departments will be populated here -->
+        </select>
+
+        <div id="roleButtons" class="space-y-4 hidden">
+            <button onclick="showDeptLogin(&#39;director&#39;)" class="btn btn-indigo w-full mb-2" id="directorRoleBtn">Director</button>
+            <button onclick="showDeptLogin(&#39;principal&#39;)" class="btn btn-indigo w-full mb-2 hidden" id="principalRoleBtn">Principal</button>
+            <button onclick="showDeptLogin(&#39;admin&#39;)" class="btn btn-primary w-full mb-2">Admin</button>
+            <button onclick="showDeptLogin(&#39;faculty&#39;)" class="btn btn-green w-full">Faculty</button>
+        </div>
+
+        <button onclick="showPage(&#39;register&#39;)" class="mt-4 w-32 px-3 py-1 rounded-full text-white text-sm bg-blue-600 hover:bg-blue-700 transition-colors duration-300">
+            Back
+        </button>
+    </div>
+
+    <!-- <div id="loginAdminS" class="hidden w-[400px] bg-white rounded-3xl shadow-xl p-8">
+        <h2 class="text-2xl font-bold mb-6 text-center">Admin Login</h2>
+        <input id="adminUser" placeholder="Username / Email" class="w-full p-3 mb-3" />
+        <input id="adminPass" placeholder="Password" type="password" class="w-full p-3 mb-6" />
+        <button onclick="showDashboard('admin')" class="btn btn-primary w-full">Login</button>
+        <button onclick="showPage('department')"
+            class="mt-4 w-32 px-3 py-1 rounded-full text-white text-sm bg-blue-600 hover:bg-blue-700 transition-colors duration-300">
+            Back
+        </button>
+    </div>
+
+    <div id="loginFacultyS" class="hidden w-[400px] bg-white rounded-3xl shadow-xl p-8">
+        <h2 class="text-2xl font-bold mb-6 text-center">Faculty Login</h2>
+        <input id="facultyUser" placeholder="Username / Email" class="w-full p-3 mb-3" />
+        <input id="facultyPass" placeholder="Password" type="password" class="w-full p-3 mb-6" />
+        <button onclick="showDashboard('faculty')" class="btn btn-green w-full">Login</button>
+        <button onclick="showPage('department')"
+            class="mt-4 w-32 px-3 py-1 rounded-full text-white text-sm bg-blue-600 hover:bg-blue-700 transition-colors duration-300">
+            Back
+        </button>
+    </div> -->
+
+
+    <div id="loginDirector" class="hidden w-[400px] bg-white rounded-3xl shadow-xl p-8">
+        <h2 class="text-2xl font-bold mb-6 text-center">Director Login</h2>
+        <input id="directorUser" placeholder="Username / Email" class="w-full p-3 mb-3">
+        <input id="directorPass" placeholder="Password" type="password" class="w-full p-3 mb-6">
+        <button onclick="showDashboard(&#39;director&#39;)" class="btn btn-indigo w-full">Login</button>
+        <button onclick="showPage(&#39;department&#39;)" class="mt-4 w-32 px-3 py-1 rounded-full text-white text-sm bg-blue-600 hover:bg-blue-700 transition-colors duration-300">
+            Back
+        </button>
+    </div>
+
+    <div id="loginPrincipal" class="hidden w-[400px] bg-white rounded-3xl shadow-xl p-8">
+        <h2 class="text-2xl font-bold mb-6 text-center">Principal Login</h2>
+        <input id="principalUser" placeholder="Username / Email" class="w-full p-3 mb-3">
+        <input id="principalPass" placeholder="Password" type="password" class="w-full p-3 mb-6">
+        <button onclick="showDashboard(&#39;principal&#39;)" class="btn btn-indigo w-full">Login</button>
+        <button onclick="showPage(&#39;schoolRoles&#39;)" class="mt-4 w-32 px-3 py-1 rounded-full text-white text-sm bg-blue-600 hover:bg-blue-700 transition-colors duration-300">
+            Back
+        </button>
+    </div>
+
+    <div id="loginAdmin" class="hidden w-[400px] bg-white rounded-3xl shadow-xl p-8">
+        <h2 class="text-2xl font-bold mb-6 text-center">Admin Login</h2>
+        <input id="adminUser" placeholder="Username / Email" class="w-full p-3 mb-3">
+        <input id="adminPass" placeholder="Password" type="password" class="w-full p-3 mb-6">
+        <button onclick="showDashboard(&#39;admin&#39;)" class="btn btn-primary w-full">Login</button>
+        <button onclick="showPage(&#39;department&#39;)" class="mt-4 w-32 px-3 py-1 rounded-full text-white text-sm bg-blue-600 hover:bg-blue-700 transition-colors duration-300">
+            Back
+        </button>
+    </div>
+
+    <div id="loginFaculty" class="hidden w-[400px] bg-white rounded-3xl shadow-xl p-8">
+        <h2 class="text-2xl font-bold mb-6 text-center">Faculty Login</h2>
+        <input id="facultyUser" placeholder="Username / Email" class="w-full p-3 mb-3">
+        <input id="facultyPass" placeholder="Password" type="password" class="w-full p-3 mb-6">
+        <button onclick="showDashboard(&#39;faculty&#39;)" class="btn btn-green w-full">Login</button>
+        <button onclick="showPage(&#39;department&#39;)" class="mt-4 w-32 px-3 py-1 rounded-full text-white text-sm bg-blue-600 hover:bg-blue-700 transition-colors duration-300">
+            Back
+        </button>
+    </div>
+
+    <div id="loginSchool" class="hidden w-[400px] bg-white rounded-3xl shadow-xl p-8">
+        <h2 class="text-2xl font-bold mb-6 text-center">School Admin / Principal Login</h2>
+        <input id="schoolUser" placeholder="Username / Email" class="w-full p-3 mb-3">
+        <input id="schoolPass" placeholder="Password" type="password" class="w-full p-3 mb-6">
+        <div class="flex gap-6">
+            <button onclick="showDashboard(&#39;schoolPrincipal&#39;)" class="btn btn-indigo w-full">Principal View</button>
+            <button onclick="showDashboard(&#39;schoolAdmin&#39;)" class="btn btn-primary w-full">Admin View</button>
+        </div>
+        <button onclick="showPage(&#39;register&#39;)" class="mt-4 w-32 px-3 py-1 rounded-full text-white text-sm bg-blue-600 hover:bg-blue-700 transition-colors duration-300">
+            Back
+        </button>
+    </div>
+
+    <div id="dashboardDirector" class="hidden w-full max-w-6xl mx-auto">
+        <div class="custom-gradient text-white p-6 rounded-3xl mb-6 flex justify-between items-center">
+            <span id="directorInst" class="text-xl font-bold" style="background:linear-gradient(90deg,#4f46e5,#2563eb);color:#fff;padding:1rem;border-radius:1rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center">Institute Director</span>
+            <span id="directorName" class="text-lg" style="color: black;">Director User</span>
+        </div>
+        <button onclick="showPage(&#39;loginDirector&#39;)" class="mt-4 w-32 px-3 py-1 rounded-full text-white text-sm bg-blue-600 hover:bg-blue-700 transition-colors duration-300">
+            Back
+        </button>
+
+        <div class="grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem">
+            <div class="card">
+                <h3 class="font-semibold">Overview</h3>
+                <p class="small">Total Faculty: 120</p>
+                <p class="small">Departments: 6</p>
+                <p class="small">Students: 3000</p>
+            </div>
+
+            <div class="card">
+                <h3 class="font-semibold">Manage All Timetables</h3>
+                <p class="small">As director you can view &amp; manage all generated timetables below.</p>
+                <div class="mt-4">
+                    <button class="btn btn-indigo w-full" onclick="showAllTimetables()">View All Timetables</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboardPrincipal" class="hidden w-full max-w-6xl mx-auto">
+        <div class="custom-gradient text-white p-6 rounded-3xl mb-6 flex justify-between items-center">
+            <span class="text-xl font-bold">School Principal</span>
+            <span id="principalName" class="text-lg">Principal User</span>
+        </div>
+        <button onclick="showPage(&#39;loginPrincipal&#39;)" class="mt-4 w-32 px-3 py-1 rounded-full text-white text-sm bg-blue-600 hover:bg-blue-700 transition-colors duration-300">
+            Back
+        </button>
+        <div class="grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem">
+            <div class="card">
+                <h3 class="font-semibold">Timetable Management</h3>
+                <p class="small">Same as director — view all timetables and manage school-level settings.</p>
+                <button class="btn btn-indigo w-full mt-3" onclick="showAllTimetables()">View / Manage
+                    Timetables</button>
+            </div>
+
+            <div class="card">
+                <h3 class="font-semibold">Upload / Manage CSV (Principal)</h3>
+                <p class="small">Upload school CSV for bulk lecture data.</p>
+                <input type="file" onchange="previewCSV(event,&#39;schoolPrincipal&#39;)" class="mb-3">
+                <div id="csvPreviewSchoolPrincipal" class="small"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboardSchoolPrincipal" class="hidden w-full max-w-6xl mx-auto">
+        <div class="custom-gradient text-white p-6 rounded-3xl mb-6 flex justify-between items-center">
+            <span class="text-xl font-bold">School Principal</span>
+            <span id="schoolPrincipalName" class="text-lg">School Principal</span>
+        </div>
+        <button onclick="showPage(&#39;loginSchool&#39;)" class="mt-4 w-32 px-3 py-1 rounded-full text-white text-sm bg-blue-600 hover:bg-blue-700 transition-colors duration-300">
+            Back
+        </button>
+
+        <div class="grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem">
+            <div class="card">
+                <h3 class="font-semibold">Timetable Management</h3>
+                <p class="small">Same as director — view all timetables and manage school-level settings.</p>
+                <button class="btn btn-indigo w-full mt-3" onclick="showAllTimetables()">View / Manage
+                    Timetables</button>
+            </div>
+
+            <div class="card">
+                <h3 class="font-semibold">Upload / Manage CSV (School Principal)</h3>
+                <p class="small">Upload school CSV for bulk lecture data.</p>
+                <input type="file" onchange="previewCSV(event,&#39;schoolPrincipal&#39;)" class="mb-3">
+                <div id="csvPreviewSchoolPrincipal" class="small"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboardAdmin" class="hidden w-full max-w-6xl mx-auto">
+        <div class="bg-gradient-to-r" style="background:linear-gradient(90deg,#4f46e5,#2563eb);color:#fff;padding:1rem;border-radius:1rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center">
+            <span id="adminInst" class="text-xl font-bold"></span>
+            <span id="adminName" class="text-lg">Admin • Admin</span>
+        </div>
+        <button onclick="showPage(&#39;loginAdmin&#39;)" class="mb-6 p-3">Back</button>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem">
+            <div class="card">
+                <h3 class="font-semibold">Upload Faculty / Lecture Data (CSV)</h3>
+                <p class="small">CSV columns recommended: faculty,semester,day,time,subject,section,duration (mins)</p>
+                <input type="file" onchange="previewCSV(event,&#39;admin&#39;)" class="mb-3">
+                <div id="csvPreview" class="small"></div>
+            </div>
+
+            <div class="card">
+                <h3 class="font-semibold">Classroom Settings</h3>
+                <input id="lectureDuration" placeholder="Default Lecture Duration (mins)" type="number" class="w-full p-3 mb-2">
+                <input id="labDuration" placeholder="Lab Duration (mins)" type="number" class="w-full p-3 mb-2">
+                <input id="lunchDuration" placeholder="Lunch Duration (mins)" type="number" class="w-full p-3 mb-2">
+                <input id="noOfSections" placeholder="No. of Sections" type="number" class="w-full p-3 mb-2">
+                <button onclick="saveClassroomSettings()" class="btn btn-primary w-full">Save Settings</button>
+            </div>
+
+            <div class="card">
+                <h3 class="font-semibold">Generate Timetable</h3>
+                <input id="generateSection" placeholder="Section (eg A)" class="w-full p-3 mb-2">
+                <button onclick="generateTimetable(document.getElementById(&#39;generateSection&#39;).value || &#39;A&#39;)" class="btn btn-indigo w-full mb-2">Generate</button>
+                <button onclick="generateAlternate()" class="btn btn-green w-full">Generate Alternate</button>
+            </div>
+
+            <div class="card">
+                <h3 class="font-semibold">Absence / Notifications</h3>
+                <div id="absentLog" class="small">No absences yet.</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboardSchoolAdmin" class="hidden w-full max-w-6xl mx-auto">
+        <div style="background:linear-gradient(90deg,#3b82f6,#06b6d4);color:#fff;padding:1rem;border-radius:1rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center">
+            <span class="text-xl font-bold">School Admin</span>
+            <span id="schoolAdminName" class="text-lg">School Admin</span>
+        </div>
+        <button onclick="showPage(&#39;loginSchool&#39;)" class="mt-4 w-32 px-3 py-1 rounded-full text-white text-sm bg-blue-600 hover:bg-blue-700 transition-colors duration-300">
+            Back
+        </button>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem">
+            <div class="card">
+                <h3 class="font-semibold">Upload CSV (School)</h3>
+                <p class="small">Include per-lecture duration and other info in CSV.</p>
+                <input type="file" onchange="previewCSV(event,&#39;schoolAdmin&#39;)" class="mb-3">
+                <div id="csvPreviewSchoolAdmin" class="small"></div>
+            </div>
+
+            <div class="card">
+                <h3 class="font-semibold">School Schedule Settings</h3>
+                <input id="schoolLectureDuration" placeholder="Lecture Duration (mins)" type="number" class="w-full p-3 mb-2">
+                <input id="schoolLunchDuration" placeholder="Lunch Duration (mins)" type="number" class="w-full p-3 mb-2">
+                <button onclick="saveSchoolSettings()" class="btn btn-primary w-full">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboardFaculty" class="hidden w-full max-w-6xl mx-auto">
+        <div style="background:linear-gradient(90deg,#16a34a,#10b981);color:#fff;padding:1rem;border-radius:1rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center">
+            <span id="facultyInst" class="text-xl font-bold">Faculty Dashboard</span>
+            <span id="facultyName" class="text-lg">Faculty User</span>
+        </div>
+        <button onclick="showPage(&#39;loginFaculty&#39;)" class="mb-6 p-3">Back</button>
+
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:1rem">
+            <div class="card">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="font-semibold">My Timetable</h3>
+                    <div>
+                        <label class="small">Semester:</label>
+                        <select id="facultySemester" onchange="renderFacultyTimetable()" class="p-2">
+                            <option value="Sem1">Sem 1</option>
+                            <option value="Sem2">Sem 2</option>
+                            <option value="Sem3">Sem 3</option>
+                            <option value="Sem4">Sem 4</option>
+                        </select>
+                    </div>
+                </div>
+
+                <table id="facultyTimetableTable" class="small">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>9:00</th>
+                            <th>10:00</th>
+                            <th>11:00</th>
+                            <th>12:00</th>
+                            <th>1:00</th>
+                        </tr>
+                    </thead>
+                    <tbody id="facultyTimetableBody"></tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3 class="font-semibold">Engagement</h3>
+                <p class="small">Select day to view lectures, check who's free, inform admin</p>
+
+                <label class="small">Select Day</label>
+                <select id="engageDay" class="w-full p-3 mb-2">
+                    <option>Mon</option>
+                    <option>Tue</option>
+                    <option>Wed</option>
+                    <option>Thu</option>
+                    <option>Fri</option>
+                    <option>Sat</option>
+                </select>
+
+                <button onclick="viewLecturesForDay()" class="btn btn-indigo w-full mb-2">View Lectures</button>
+                <button onclick="checkWhosFree()" class="btn btn-primary w-full mb-2">Check Who's Free</button>
+                <button onclick="informAdmin()" class="btn btn-green w-full">Inform Admin</button>
+
+                <div id="engageOutput" class="small mt-3"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="timetableAll" class="hidden w-full max-w-5xl mx-auto bg-white rounded-3xl shadow-2xl p-8">
+        <h2 class="font-bold text-2xl text-blue-700 mb-4">All Generated Timetables</h2>
+        <button onclick="showPreviousDashboard()" class="mt-4 w-32 px-3 py-1 rounded-full text-white text-sm bg-blue-600 hover:bg-blue-700 transition-colors duration-300">
+            Back
+        </button>
+        <div id="allTimetablesContainer" class="small"></div>
+    </div>
+
+    <div id="timetable" class="hidden w-full max-w-5xl mx-auto bg-white rounded-3xl shadow-2xl p-8">
+        <h2 class="font-bold text-2xl text-blue-700 mb-4">Generated Timetable</h2>
+        <button onclick="showPage(&#39;dashboardAdmin&#39;)" class="mb-6 p-3">Back to Admin Dashboard</button>
+        <table class="w-full border-collapse text-sm text-center rounded-lg overflow-hidden">
+            <thead class="bg-blue-600 text-white">
+                <tr>
+                    <th class="p-3">Day</th>
+                    <th class="p-3">9:00</th>
+                    <th class="p-3">10:00</th>
+                    <th class="p-3">11:00</th>
+                    <th class="p-3">12:00</th>
+                    <th class="p-3">1:00</th>
+                </tr>
+            </thead>
+            <tbody id="timetableBody" class="bg-blue-50 text-gray-700"></tbody>
+        </table>
+    </div>
+
+    <script>
+        // Global simple storage for demo (in-memory). Real app should persist to server/db.
+        const storage = {
+            csvAdmin: null,
+            csvSchool: null,
+            settings: { lectureDuration: 45, labDuration: 90, lunchDuration: 30, noOfSections: 1 },
+            schoolSettings: { lectureDuration: 40, lunchDuration: 30 },
+            generated: {}, // keyed by section
+            instituteType: '' // 'college' or 'school'
+        };
+
+        // Utility: hide all major divs then show requested
+        function showPage(pageId) {
+            document.querySelectorAll('body > div, body > main').forEach(el => el.classList.add('hidden'));
+            const el = document.getElementById(pageId);
+            if (el) el.classList.remove('hidden');
+            // Scroll to top of page container for better UX
+            window.scrollTo(0, 0);
+        }
+
+        // initial: show front
+        showPage('front');
+
+        function validateAndShowDept(type) {
+            let name;
+
+            if (type === 'college') {
+                name = document.getElementById('collegeName').value.trim();
+                if (!name) { alert('Please fill all fields'); return; }
+
+                document.getElementById('instituteNameDisplay').innerText = name;
+                document.getElementById('directorRoleBtn').classList.remove('hidden');
+                document.getElementById('principalRoleBtn').classList.add('hidden');
+                storage.instituteType = 'college';
+
+                populateDepartmentDropdown('college'); // Populate dropdown
+                showPage('department'); // ✅ Show department selection only for college
+            }
+
+            else if (type === 'school') {
+                name = document.getElementById('schoolName').value.trim();
+                if (!name) { alert('Please fill all fields'); return; }
+
+                storage.instituteType = 'school';
+                document.getElementById('instituteNameDisplay').innerText = name;
+                document.getElementById('directorRoleBtn').classList.add('hidden');
+                document.getElementById('principalRoleBtn').classList.remove('hidden');
+
+                showPage('schoolRoles'); // ✅ Skip department, go straight to login
+            }
+        }
+
+
+        // Modified to handle both college and school validation and display name
+        // function validateAndShowDept(type) {
+        //     let name;
+        //     if (type === 'college') {
+        //         name = document.getElementById('collegeName').value.trim();
+        //         document.getElementById('directorRoleBtn').classList.remove('hidden');
+        //         document.getElementById('principalRoleBtn').classList.add('hidden');
+        //         storage.instituteType = 'college';
+        //     } else if (type === 'school') {
+        //         name = document.getElementById('schoolName').value.trim();
+        //         document.getElementById('directorRoleBtn').classList.add('hidden');
+        //         document.getElementById('principalRoleBtn').classList.remove('hidden');
+        //         storage.instituteType = 'school';
+        //     }
+
+        //     if (!name) { alert('Please fill all fields'); return; }
+
+        //     // Set the name on the department page before showing it
+        //     document.getElementById('instituteNameDisplay').innerText = name;
+
+        //     // Populate department dropdown based on institute type
+        //     populateDepartmentDropdown(type);
+
+        //     showPage('department');
+        // }
+
+        function populateDepartmentDropdown(type) {
+            const select = document.getElementById('departmentSelect');
+            select.innerHTML = '<option value=""></option>';
+
+            if (type === 'college') {
+                //  select.innerHTML = '<option value=""></option>'
+                const collegeDepartments = [
+                    'CSE', 'AIML', 'DS', 'Cyber Security',
+                    'Mechanical', 'Electrical', 'Civil'
+                ];
+
+                collegeDepartments.forEach(dept => {
+                    const option = document.createElement('option');
+                    option.value = dept.toLowerCase().replace(' ', '_');
+                    option.textContent = dept;
+                    select.appendChild(option);
+                });
+            }
+            // else if (type === 'school') {
+            //     for (let i = 1; i <= 1; i++) {
+            //         const option = document.createElement('option');
+            //         option.value = `Select_${i}`;
+            //         option.textContent = `Select ${i}`;
+            //         select.appendChild(option);
+            //     }
+            // const option = document.createElement('option')
+            // option.value = `Select Your Role`;
+            // Option.textContent = `Select Your role`;
+            // select.appendChild(option);
+        }
+        // }
+
+        function handleDepartmentChange() {
+            const selectedDept = document.getElementById('departmentSelect').value;
+            const roleButtons = document.getElementById('roleButtons');
+
+            if (selectedDept) {
+                roleButtons.classList.remove('hidden');
+            } else {
+                roleButtons.classList.add('hidden');
+            }
+        }
+
+        function showDeptLogin(dept) {
+            // build id like 'loginDirector', 'loginAdmin', 'loginPrincipal', 'loginFaculty'
+            // ensure first letter uppercase
+            const page = 'login' + dept.charAt(0).toUpperCase() + dept.slice(1);
+            showPage(page);
+        }
+
+        function showPreviousDashboard() {
+            if (!document.getElementById('dashboardDirector').classList.contains('hidden')) showPage('dashboardDirector');
+            else if (!document.getElementById('dashboardPrincipal').classList.contains('hidden')) showPage('dashboardPrincipal');
+            else if (!document.getElementById('dashboardSchoolPrincipal').classList.contains('hidden')) showPage('dashboardSchoolPrincipal');
+            else showPage('dashboardDirector');
+        }
+
+        function showDashboard(dept) {
+            if (dept === 'admin') {
+                document.getElementById('adminName').innerText = (document.getElementById('adminUser').value || 'Admin') + ' • Admin';
+                showPage('dashboardAdmin');
+            } else if (dept === 'director') {
+                document.getElementById('directorName').innerText = (document.getElementById('directorUser').value || 'Director') + ' • Director';
+                showPage('dashboardDirector');
+            } else if (dept === 'principal') {
+                document.getElementById('principalName').innerText = (document.getElementById('principalUser').value || 'Principal');
+                showPage('dashboardPrincipal');
+            } else if (dept === 'faculty') {
+                document.getElementById('facultyName').innerText = (document.getElementById('facultyUser').value || 'Faculty') + ' • Faculty';
+                showPage('dashboardFaculty');
+                renderFacultyTimetable();
+            } else if (dept === 'schoolPrincipal') {
+                document.getElementById('schoolPrincipalName').innerText = (document.getElementById('schoolUser').value || 'School Principal');
+                showPage('dashboardSchoolPrincipal');
+            } else if (dept === 'schoolAdmin') {
+                document.getElementById('schoolAdminName').innerText = (document.getElementById('schoolUser').value || 'School Admin');
+                showPage('dashboardSchoolAdmin');
+            }
+        }
+
+        // CSV preview for admin/school. Keep simple CSV parse
+        function previewCSV(event, who = 'admin') {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const text = e.target.result.trim();
+                const lines = text.split(/\r?\n/).filter(Boolean);
+                if (lines.length === 0) return;
+                const headers = lines[0].split(',').map(h => h.trim());
+                const rows = lines.slice(1).map(r => r.split(',').map(c => c.trim()));
+                const preview = { headers, rows };
+
+                if (who === 'admin') {
+                    storage.csvAdmin = preview;
+                    const el = document.getElementById('csvPreview');
+                    if (el) el.innerHTML = formatCSVPreview(preview);
+                } else if (who.startsWith('school')) {
+                    // schoolPrincipal / schoolAdmin
+                    storage.csvSchool = preview;
+                    let elId = 'csvPreviewSchoolAdmin';
+                    if (who === 'schoolPrincipal') elId = 'csvPreviewSchoolPrincipal';
+                    const el = document.getElementById(elId);
+                    if (el) el.innerHTML = formatCSVPreview(preview);
+                }
+                parseCSVIntoTimetable(preview);
+            };
+            reader.readAsText(file);
+        }
+
+        function formatCSVPreview(preview) {
+            let html = '<table><tr>' + preview.headers.map(h => `<th>${h}</th>`).join('') + '</tr>';
+            for (let i = 0; i < Math.min(preview.rows.length, 6); i++) {
+                html += '<tr>' + preview.rows[i].map(c => `<td>${c}</td>`).join('') + '</tr>';
+            }
+            html += '</table>';
+            return html;
+        }
+
+        function parseCSVIntoTimetable(preview) {
+            for (const r of preview.rows) {
+                const map = {};
+                preview.headers.forEach((h, i) => map[h.toLowerCase()] = (r[i] || '').trim());
+                const section = map.section || 'A';
+                if (!storage.generated[section]) storage.generated[section] = {};
+                const day = (map.day || 'Mon');
+                if (!storage.generated[section][day]) storage.generated[section][day] = [];
+                storage.generated[section][day].push({
+                    time: map.time || '9:00',
+                    subject: map.subject || 'Unknown',
+                    faculty: map.faculty || 'TBD',
+                    duration: parseInt(map.duration) || storage.settings.lectureDuration
+                });
+            }
+        }
+
+        function saveClassroomSettings() {
+            const ld = parseInt(document.getElementById('lectureDuration').value) || storage.settings.lectureDuration;
+            const lab = parseInt(document.getElementById('labDuration').value) || storage.settings.labDuration;
+            const lunch = parseInt(document.getElementById('lunchDuration').value) || storage.settings.lunchDuration;
+            const sec = parseInt(document.getElementById('noOfSections').value) || storage.settings.noOfSections;
+            storage.settings = { lectureDuration: ld, labDuration: lab, lunchDuration: lunch, noOfSections: sec };
+            alert('Settings saved.');
+        }
+
+        function saveSchoolSettings() {
+            const ld = parseInt(document.getElementById('schoolLectureDuration').value) || storage.schoolSettings.lectureDuration;
+            const lunch = parseInt(document.getElementById('schoolLunchDuration').value) || storage.schoolSettings.lunchDuration;
+            storage.schoolSettings = { lectureDuration: ld, lunchDuration: lunch };
+            alert('School settings saved.');
+        }
+
+        // GENERATE TIMETABLE (admin button)
+        function generateTimetable(section = 'A') {
+            const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const times = ['9:00', '10:00', '11:00', '12:00', '1:00'];
+            const body = [];
+            for (const d of days) {
+                const row = [];
+                if (storage.generated[section] && storage.generated[section][d]) {
+                    const slots = times.map(t => {
+                        const found = storage.generated[section][d].find(x => x.time === t);
+                        return found ? `${found.subject} (${found.faculty})` : 'Free';
+                    });
+                    row.push(`<td class="p-3 font-semibold">${d}</td>` + slots.map(s => `<td class="p-3">${s}</td>`).join(''));
+                } else {
+                    const sample = {
+                        Mon: ['Math', 'DBMS', 'AI', 'Free', 'Lab'],
+                        Tue: ['Physics', 'Networks', 'Free', 'Free', 'Lab'],
+                        Wed: ['Chemistry', 'DS', 'OS', 'Free', 'Lab'],
+                        Thu: ['Free', 'Programming', 'Maths', 'AI', 'Free'],
+                        Fri: ['DBMS', 'Networks', 'OS', 'Free', 'Lab'],
+                        Sat: ['Free', 'Free', 'Free', 'Free', 'Free']
+                    };
+                    const slots = sample[d] || ['Free', 'Free', 'Free', 'Free', 'Free'];
+                    row.push(`<td class="p-3 font-semibold">${d}</td>` + slots.map(s => `<td class="p-3">${s} (${section})</td>`).join(''));
+                }
+                body.push(`<tr>${row.join('')}</tr>`);
+            }
+            const tbody = document.getElementById('timetableBody');
+            if (tbody) tbody.innerHTML = body.join('');
+            storage.generated[section] = storage.generated[section] || {};
+            for (const d of ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']) if (!storage.generated[section][d]) storage.generated[section][d] = [];
+            showPage('timetable');
+        }
+
+        function generateAlternate() {
+            const html = `
+      <tr><td class="p-3 font-semibold">Tue</td><td class="p-3">OS (Alt)</td><td class="p-3">Networks (Alt)</td><td class="p-3">Free</td><td class="p-3">Lab (Alt)</td><td class="p-3">Free</td></tr>
+      <tr><td class="p-3 font-semibold">Thu</td><td class="p-3">Free</td><td class="p-3">Programming (Alt)</td><td class="p-3">Maths (Alt)</td><td class="p-3">AI (Alt)</td><td class="p-3">Free</td></tr>
+    `;
+            const tbody = document.getElementById('timetableBody');
+            if (tbody) tbody.innerHTML = html;
+            showPage('timetable');
+        }
+
+        // FACULTY TIMETABLE RENDER (Mon-Sat)
+        function renderFacultyTimetable() {
+            const sem = document.getElementById('facultySemester').value;
+            const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const mapBySem = {
+                Sem1: {
+                    Mon: ['Math', 'DBMS', 'AI', 'Free', 'Lab'],
+                    Tue: ['Physics', 'Networks', 'Free', 'Free', 'Lab'],
+                    Wed: ['Chem', 'DS', 'OS', 'Free', 'Lab'],
+                    Thu: ['Free', 'Programming', 'Maths', 'AI', 'Free'],
+                    Fri: ['DBMS', 'Networks', 'OS', 'Free', 'Lab'],
+                    Sat: ['Free', 'Free', 'Free', 'Free', 'Free']
+                },
+                Sem2: {
+                    Mon: ['DS', 'OS', 'AI', 'Free', 'Lab'],
+                    Tue: ['Math', 'DBMS', 'Networks', 'Free', 'Lab'],
+                    Wed: ['Chem', 'Prog', 'OS', 'Free', 'Lab'],
+                    Thu: ['Free', 'Free', 'Maths', 'AI', 'Free'],
+                    Fri: ['DBMS', 'Networks', 'Free', 'Free', 'Lab'],
+                    Sat: ['Free', 'Free', 'Free', 'Free', 'Free']
+                },
+                Sem3: {},
+                Sem4: {}
+            };
+            const dataset = mapBySem[sem] || mapBySem['Sem1'];
+            const rows = days.map(d => {
+                const slots = (dataset[d] || ['Free', 'Free', 'Free', 'Free', 'Free']).map(s => `<td>${s}</td>`).join('');
+                return `<tr><td class="p-2 font-semibold">${d}</td>${slots}</tr>`;
+            }).join('');
+            const body = document.getElementById('facultyTimetableBody');
+            if (body) body.innerHTML = rows;
+        }
+
+        // ENGAGEMENT functions
+        function viewLecturesForDay() {
+            const day = document.getElementById('engageDay').value;
+            const table = document.getElementById('facultyTimetableBody');
+            if (!table || !table.innerText.trim()) renderFacultyTimetable();
+            const rows = document.querySelectorAll('#facultyTimetableBody tr');
+            let out = '';
+            rows.forEach(r => {
+                if (r.children[0].innerText.trim() === day) {
+                    const slots = Array.from(r.children).slice(1).map((c, i) => `${['9:00', '10:00', '11:00', '12:00', '1:00'][i]} - ${c.innerText}`);
+                    out = `<strong>${day} lectures:</strong><br>${slots.join('<br>')}`;
+                }
+            });
+            document.getElementById('engageOutput').innerHTML = out || 'No lectures found for selected day.';
+        }
+
+        function checkWhosFree() {
+            const day = document.getElementById('engageDay').value;
+            const freeList = [];
+            for (const section in storage.generated) {
+                const dayArr = storage.generated[section][day] || [];
+                if (dayArr.length === 0) {
+                    freeList.push(`Section ${section} — (entire day free / no schedule uploaded)`);
+                } else {
+                    dayArr.forEach(slot => {
+                        if (!slot.subject || slot.subject.toLowerCase().includes('free')) freeList.push(`${slot.faculty || 'Unknown'} (Section ${section}) - ${slot.time}`);
+                    });
+                }
+            }
+            const tableRows = document.querySelectorAll('#facultyTimetableBody tr');
+            tableRows.forEach(tr => {
+                if (tr.children[0].innerText.trim() === day) {
+                    Array.from(tr.children).slice(1).forEach((td, i) => {
+                        if (td.innerText.toLowerCase().includes('free')) freeList.push(`Your slot ${['9:00', '10:00', '11:00', '12:00', '1:00'][i]} - You are free`);
+                    });
+                }
+            });
+            document.getElementById('engageOutput').innerHTML = freeList.length ? `<strong>Free / available:</strong><br>${freeList.join('<br>')}` : 'No free slots found.';
+        }
+
+        function informAdmin() {
+            const who = document.getElementById('facultyUser').value || 'Faculty';
+            const day = document.getElementById('engageDay').value;
+            const message = `${who} informed admin about engagement on ${day} at ${new Date().toLocaleString()}`;
+            const logEl = document.getElementById('absentLog');
+            if (logEl) logEl.innerHTML = (logEl.innerHTML === 'No absences yet.' ? '' : logEl.innerHTML + '<br>') + `<div style="background:#f3f4f6;padding:.5rem;border-radius:.5rem;margin-top:.25rem">${message}</div>`;
+            document.getElementById('engageOutput').innerHTML = 'Admin informed. Message logged.';
+        }
+
+        // For "View All Timetables" (director / principal)
+        function showAllTimetables() {
+            const container = document.getElementById('allTimetablesContainer');
+            let html = '';
+            for (const section in storage.generated) {
+                html += `<div class="card" style="margin-bottom:1rem"><h4 class="font-semibold">Section ${section}</h4>`;
+                const days = storage.generated[section];
+                for (const d in days) {
+                    html += `<div><strong>${d}:</strong> ${days[d].map(x => `${x.time} - ${x.subject} (${x.faculty || 'TBD'})`).join(', ') || 'No schedule'}</div>`;
+                }
+                html += `</div>`;
+            }
+            if (!html) html = '<div class="small">No timetables generated yet.</div>';
+            if (container) container.innerHTML = html;
+            showPage('timetableAll');
+        }
+
+        // Initialize some storage sample for demo (so check who's free etc. has some data)
+        (function initDemoData() {
+            storage.generated['A'] = storage.generated['A'] || {};
+            storage.generated['A']['Mon'] = [
+                { time: '9:00', subject: 'Math', faculty: 'Dr. Rao', duration: 45 },
+                { time: '10:00', subject: 'DBMS', faculty: 'Prof. Sharma', duration: 45 },
+                { time: '12:00', subject: 'Lab', faculty: 'Lab Incharge', duration: 90 }
+            ];
+            storage.generated['A']['Tue'] = [
+                { time: '9:00', subject: 'Physics', faculty: 'Dr. Gupta', duration: 45 },
+                { time: '10:00', subject: 'Networks', faculty: 'Prof. Jain', duration: 45 },
+                { time: '11:00', subject: 'Free', faculty: '', duration: 0 }
+            ];
+        })();
+
+        // expose a few functions globally for inline onclick handlers
+        window.previewCSV = previewCSV;
+        window.generateTimetable = generateTimetable;
+        window.generateAlternate = generateAlternate;
+        window.showPage = showPage;
+        window.showDashboard = showDashboard;
+        window.showDeptLogin = showDeptLogin;
+        window.showAllTimetables = showAllTimetables;
+        window.validateAndShowDept = validateAndShowDept;
+        window.handleDepartmentChange = handleDepartmentChange;
+    </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>
